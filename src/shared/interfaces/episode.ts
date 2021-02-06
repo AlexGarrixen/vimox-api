@@ -1,5 +1,3 @@
-import { Episode } from 'src/models';
-
 export interface Episode {
   serie: string;
   name: string;
