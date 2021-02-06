@@ -1,6 +1,6 @@
 import express from 'express';
 import { connectDb } from './db';
-import { createRoute, serie } from './routes';
+import { createRoute, serie, episode } from './routes';
 import { corsOrigin } from './middlewares';
 
 const app = express();
@@ -14,6 +14,7 @@ app.use(express.json());
 
 // routes
 createRoute(app, serie);
+createRoute(app, episode);
 
 const port = process.env.PORT || 5001;
 

@@ -3,3 +3,8 @@ export * from './serie/findSeries';
 export * from './serie/findSerieById';
 export * from './serie/deleteSerie';
 export * from './serie/updateSerie';
+
+export * from './episode/createEpisode';
+export * from './episode/findEpisodes';
+export * from './episode/deleteEpisode';
+export * from './episode/updateSerie';
