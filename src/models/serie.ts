@@ -10,6 +10,8 @@ const schema = new Schema(
     imageLg: String,
     createdAt: { type: Date, default: new Date().toISOString() },
     episodes: [{ type: Types.ObjectId, default: [], ref: 'Episode' }],
+    geners: [{ type: Types.ObjectId, default: [], ref: 'Gener' }],
+    titles: [String],
   },
   { versionKey: false }
 );

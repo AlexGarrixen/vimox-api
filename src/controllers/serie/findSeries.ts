@@ -20,7 +20,12 @@ export const findSeries = async (
   const skip = limit * (pageIndex - 1);
 
   try {
-    const series = await Serie.find().limit(limit).skip(skip).sort(sort);
+    const series = await Serie.find()
+      .limit(limit)
+      .skip(skip)
+      .sort(sort)
+      .populate('episodes')
+      .populate('geners');
     const seriesCount = await Serie.countDocuments();
     const lastPage = Math.ceil(seriesCount / limit);
 
