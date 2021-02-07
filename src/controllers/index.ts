@@ -8,3 +8,8 @@ export * from './episode/createEpisode';
 export * from './episode/findEpisodes';
 export * from './episode/deleteEpisode';
 export * from './episode/updateSerie';
+
+export * from './gener/createGener';
+export * from './gener/findGeners';
+export * from './gener/findGenerById';
+export * from './gener/deleteGener';
