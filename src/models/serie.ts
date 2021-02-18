@@ -4,7 +4,6 @@ const schema = new Schema(
   {
     name: String,
     sinopsis: String,
-    duration: Number,
     imageSm: String,
     imageMd: String,
     imageLg: String,
