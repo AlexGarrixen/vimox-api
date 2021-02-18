@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Serie } from '../../models';
+import { Types } from 'mongoose';
 
 export const findSerieById = async (
   req: Request,
@@ -8,8 +9,39 @@ export const findSerieById = async (
 ) => {
   const { serieId } = req.params;
 
+  const pipeline: Record<string, any>[] = [
+    {
+      $match: {
+        _id: Types.ObjectId(serieId),
+      },
+    },
+    {
+      $lookup: {
+        from: 'episodes',
+        localField: 'episodes',
+        foreignField: '_id',
+        as: 'episodes',
+      },
+    },
+    {
+      $lookup: {
+        from: 'geners',
+        localField: 'geners',
+        foreignField: '_id',
+        as: 'geners',
+      },
+    },
+    {
+      $addFields: {
+        totalDuration: {
+          $sum: '$episodes.duration',
+        },
+      },
+    },
+  ];
+
   try {
-    const serie = await Serie.findById(serieId);
+    const serie = await Serie.aggregate(pipeline);
 
     res.status(200).json(serie !== null ? serie : {});
   } catch (e) {
