@@ -14,6 +14,7 @@ export const schemeCreateSerie = Joi.object({
   episodes: Joi.array().items(idScheme),
   geners: Joi.array().items(idScheme),
   titles: Joi.array().items(Joi.string()),
+  type: Joi.string().required(),
 });
 
 export const schemeUpdateSerie = Joi.object({
@@ -25,4 +26,5 @@ export const schemeUpdateSerie = Joi.object({
   episodes: Joi.array().items(idScheme),
   geners: Joi.array().items(idScheme),
   titles: Joi.array().items(Joi.string()),
+  type: Joi.string(),
 });

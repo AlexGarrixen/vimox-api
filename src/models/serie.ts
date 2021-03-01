@@ -11,6 +11,7 @@ const schema = new Schema(
     episodes: [{ type: Types.ObjectId, default: [], ref: 'Episode' }],
     geners: [{ type: Types.ObjectId, default: [], ref: 'Gener' }],
     titles: [String],
+    type: String,
   },
   { versionKey: false }
 );
