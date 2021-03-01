@@ -9,6 +9,7 @@ interface Querys {
   limit_items?: string;
   title?: string;
   sort_createdAt?: 'asc' | 'desc';
+  type?: string;
 }
 
 export const findSeries = async (
@@ -16,7 +17,13 @@ export const findSeries = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { page_index, limit_items, title, sort_createdAt }: Querys = req.query;
+  const {
+    page_index,
+    limit_items,
+    title,
+    sort_createdAt,
+    type,
+  }: Querys = req.query;
 
   const pageIndex = parseInt(page_index || defaultPageIdx);
   const limit = parseInt(limit_items || defaultLimit);
@@ -60,6 +67,13 @@ export const findSeries = async (
   if (sort_createdAt)
     pipeline.push({
       $sort: { createdAt: sort_createdAt === 'desc' ? -1 : 1 },
+    });
+
+  if (type)
+    pipeline.push({
+      $match: {
+        type,
+      },
     });
 
   try {
