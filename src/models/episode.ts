@@ -1,14 +1,14 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const schema = new Schema(
   {
-    serie: { type: Types.ObjectId, ref: 'Serie' },
     name: String,
     sinopsis: String,
     src: String,
     thumbnail: String,
     previewImage: String,
     order: Number,
+    duration: Number,
     createdAt: { type: Date, default: new Date().toISOString() },
   },
   { versionKey: false }

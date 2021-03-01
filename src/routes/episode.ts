@@ -8,6 +8,7 @@ import {
 import {
   createEpisode,
   findEpisodes,
+  findById,
   deleteEpisode,
   updateEpisode,
 } from '../controllers';
@@ -17,6 +18,11 @@ export const episode: Route[] = [
     method: 'get',
     path: '/episodes',
     handlers: [findEpisodes],
+  },
+  {
+    method: 'get',
+    path: '/episodes/:episodeId',
+    handlers: [validateScheme(schemeEpisodeId, 'params'), findById],
   },
   {
     method: 'post',
