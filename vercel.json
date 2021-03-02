@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "dist/index.js"
+    }
+  ],
+  "env": {
+    "DB_NAME": "@gxanime-api_db-name",
+    "DB_PROD_NAME": "@gxanime-api_db-prod-name",
+    "DB_USER": "@gxanime-api_db-user",
+    "DB_PASSWORD": "@gxanime-api_db-password",
+    "DB_HOST": "@gxanime-api_db-host"
+  }
+}

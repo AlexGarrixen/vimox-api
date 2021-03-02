@@ -1,7 +1,7 @@
 import cors, { CorsOptions } from 'cors';
 
 const isProd = process.env.NODE_ENV === 'production';
-const whitelist: string[] = [];
+const whitelist: string[] = ['http://localhost:3000'];
 
 const options: CorsOptions = {
   origin: (origin, cb) => {
