@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Types } from 'mongoose';
 
 const schema = new Schema(
   {
@@ -10,6 +10,7 @@ const schema = new Schema(
     order: Number,
     duration: Number,
     createdAt: { type: Date, default: new Date().toISOString() },
+    serie: { type: Types.ObjectId, ref: 'Serie' },
   },
   { versionKey: false }
 );

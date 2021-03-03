@@ -9,7 +9,7 @@ export const findById = async (
   const { episodeId } = req.params;
 
   try {
-    const episode = await Episode.findById(episodeId);
+    const episode = await Episode.findById(episodeId).populate('serie');
 
     res.status(200).json(episode);
   } catch (e) {
