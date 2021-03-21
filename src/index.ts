@@ -2,6 +2,7 @@ import express from 'express';
 import { connectDb } from './db';
 import { createRoute, serie, episode, gener, auth } from './routes';
 import { corsOrigin } from './middlewares';
+import './shared/utils/authStrategies';
 
 const app = express();
 
