@@ -14,3 +14,5 @@ export * from './gener/createGener';
 export * from './gener/findGeners';
 export * from './gener/findGenerById';
 export * from './gener/deleteGener';
+
+export * from './auth/signup';
