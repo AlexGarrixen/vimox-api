@@ -1,6 +1,6 @@
 import express from 'express';
 import { connectDb } from './db';
-import { createRoute, serie, episode, gener, auth } from './routes';
+import { createRoute, serie, episode, gener, auth, user } from './routes';
 import { corsOrigin } from './middlewares';
 import './shared/utils/authStrategies';
 
@@ -18,9 +18,10 @@ createRoute(app, serie);
 createRoute(app, episode);
 createRoute(app, gener);
 createRoute(app, auth);
+createRoute(app, user);
 
 const port = process.env.PORT || 5001;
 
 app.listen(port, () => {
-	console.info(`Server listening on port ${port}`);
+  console.info(`Server listening on port ${port}`);
 });
