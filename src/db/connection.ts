@@ -13,6 +13,7 @@ export const connectDb = async () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
       autoIndex: isProduction ? false : true,
+      useFindAndModify: false,
     });
 
     console.info('Success connection db');
