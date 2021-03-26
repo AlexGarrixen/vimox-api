@@ -1,8 +1,13 @@
 import express from 'express';
-import { connectDb } from './db';
-import { createRoute, serie, episode, gener, auth, user } from './routes';
+import { connectDb } from './db/connection';
+import { createRoute } from './routes/createRoute';
+import { auth } from './routes/auth';
+import { episode } from './routes/episode';
+import { gener } from './routes/gener';
+import { serie } from './routes/serie';
+import { user } from './routes/user';
 import { corsOrigin } from './middlewares';
-import './shared/utils/authStrategies';
+import './utils/authStrategies';
 
 const app = express();
 

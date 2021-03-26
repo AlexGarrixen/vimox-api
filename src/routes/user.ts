@@ -1,4 +1,4 @@
-import { Route } from '../shared/interfaces';
+import { Route } from '../types';
 import { addSerie } from '../controllers/user/addSerie';
 import { deleteSerie } from '../controllers/user/deleteSerie';
 import { getSeries } from '../controllers/user/getSeries';
@@ -9,7 +9,7 @@ import {
   schemeDeleteSerie,
   schemeUpdateSerie,
   schemeUpdateSerieParams,
-} from '../validationSchemes/user';
+} from '../utils/validationSchemes/user';
 import validateScheme from '../middlewares/validateScheme';
 
 export const user: Route[] = [

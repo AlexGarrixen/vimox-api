@@ -1,6 +1,11 @@
-import { Route } from '../shared/interfaces';
-import { signUp, login, emailConfirmation } from '../controllers';
-import { schemeSignup, schemeEmailConfirmation } from '../validationSchemes';
+import { Route } from '../types';
+import { signUp } from '../controllers/auth/signup';
+import { login } from '../controllers/auth/login';
+import { emailConfirmation } from '../controllers/auth/emailConfirmation';
+import {
+  schemeSignup,
+  schemeEmailConfirmation,
+} from '../utils/validationSchemes/auth';
 import { validateScheme } from '../middlewares';
 
 export const auth: Route[] = [

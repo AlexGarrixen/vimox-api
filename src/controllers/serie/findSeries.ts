@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Types } from 'mongoose';
-import { Serie } from '../../models';
+import { Serie } from '../../models/serie';
 
 const defaultPageIdx = '1';
 const defaultLimit = '20';

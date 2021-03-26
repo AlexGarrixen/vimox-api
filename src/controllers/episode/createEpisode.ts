@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
-import { Episode, Serie } from '../../models';
-import { Episode as IEpisode } from '../../shared/interfaces';
+import { Episode } from '../../models/episode';
+import { Serie } from '../../models/serie';
+import { Episode as IEpisode } from '../../types';
 
 type Ep = IEpisode & Document;
 

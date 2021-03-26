@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Types } from 'mongoose';
-import { Episode } from '../../models';
+import { Episode } from '../../models/episode';
 
 interface EpisodeQuerys {
   sort_createdAt?: 'asc' | 'desc';

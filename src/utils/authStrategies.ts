@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { BasicStrategy } from 'passport-http';
-import bcrypt from 'bcrypt';
-import { User } from '../../models/user';
+import bcrypt from 'bcryptjs';
+import { User } from '../models/user';
 
 passport.use(
   new BasicStrategy(async (username, password, done) => {
