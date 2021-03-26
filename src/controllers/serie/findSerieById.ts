@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Serie } from '../../models';
+import { Serie } from '../../models/serie';
 import { Types } from 'mongoose';
 
 export const findSerieById = async (

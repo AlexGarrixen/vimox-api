@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Episode } from '../../models';
+import { Episode } from '../../models/episode';
 
 export const updateEpisode = async (
   req: Request,

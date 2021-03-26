@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import passport from 'passport';
-import { createToken, createRefreshToken } from '../../shared/utils/jwt';
+import { createToken, createRefreshToken } from '../../utils/jwt';
 
 export const login = async (req: Request, res: Response, next: NextFunction) =>
   passport.authenticate('basic', (error, user) => {

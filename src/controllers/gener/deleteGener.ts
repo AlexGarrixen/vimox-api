@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Gener } from '../../models';
+import { Gener } from '../../models/gener';
 
 export const deleteGener = async (
   req: Request,

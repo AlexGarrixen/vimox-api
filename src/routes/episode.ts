@@ -1,17 +1,15 @@
-import { Route } from '../shared/interfaces';
+import { Route } from '../types';
 import { validateScheme } from '../middlewares';
+import { createEpisode } from '../controllers/episode/createEpisode';
+import { findEpisodes } from '../controllers/episode/findEpisodes';
+import { findById } from '../controllers/episode/findById';
+import { deleteEpisode } from '../controllers/episode/deleteEpisode';
+import { updateEpisode } from '../controllers/episode/updateSerie';
 import {
   schemeCreateEpisode,
   schemeEpisodeId,
   schemeUpdateEpisode,
-} from '../validationSchemes';
-import {
-  createEpisode,
-  findEpisodes,
-  findById,
-  deleteEpisode,
-  updateEpisode,
-} from '../controllers';
+} from '../utils/validationSchemes/episode';
 
 export const episode: Route[] = [
   {

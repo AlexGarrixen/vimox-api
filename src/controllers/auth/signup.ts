@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-import { User } from '../../models';
-import { sgMail, templateEmailVerification } from '../../shared/utils/sendgrid';
+import { User } from '../../models/user';
+import { sgMail, templateEmailVerification } from '../../utils/sendgrid';
 
 interface RequestBody {
   username: string;

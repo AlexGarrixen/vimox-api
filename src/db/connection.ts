@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { databaseSettings } from '../config';
+import { settings } from '../config/database';
 
 const isProduction = process.env.NODE_ENV === 'production';
-const { database, host, password, username } = databaseSettings;
+const { database, host, password, username } = settings;
 
 const uri = `mongodb+srv://${username}:${password}@${host}/${database}?retryWrites=true&w=majority`;
 

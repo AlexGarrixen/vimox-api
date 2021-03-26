@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { User } from '../../models/user';
-import { createToken, createRefreshToken } from '../../shared/utils/jwt';
+import { createToken, createRefreshToken } from '../../utils/jwt';
 
 interface RequestBody {
   emailToken?: string;
