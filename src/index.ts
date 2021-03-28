@@ -6,7 +6,7 @@ import { episode } from './routes/episode';
 import { gener } from './routes/gener';
 import { serie } from './routes/serie';
 import { user } from './routes/user';
-import { corsOrigin } from './middlewares';
+import { corsOrigin, errorHandlers, notFound } from './middlewares';
 import './utils/authStrategies';
 
 const app = express();
@@ -24,6 +24,13 @@ createRoute(app, episode);
 createRoute(app, gener);
 createRoute(app, auth);
 createRoute(app, user);
+
+//error handlers
+app.use(errorHandlers.errorBoomImplementation);
+app.use(errorHandlers.errorHandler);
+
+//404
+app.use(notFound);
 
 const port = process.env.PORT || 5001;
 

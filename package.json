@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/boom": "^9.1.2",
     "@sendgrid/mail": "^7.4.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
