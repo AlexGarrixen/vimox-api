@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
+import Boom from '@hapi/boom';
 import { User } from '../../models/user';
 import { sgMail, templateEmailVerification } from '../../utils/sendgrid';
 
@@ -20,9 +21,7 @@ export const signUp = async (
     const registeredUser = await User.find({ email });
 
     if (registeredUser.length > 0)
-      return res
-        .status(409)
-        .json({ message: 'There is already a user with this account' });
+      return next(Boom.conflict('There is already a user with this account'));
 
     const encryptedPassword = await bcrypt.hash(password, 10);
     const emailToken = crypto.randomBytes(16).toString('hex');

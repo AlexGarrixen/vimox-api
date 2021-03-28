@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
+import Boom from '@hapi/boom';
 import { User } from '../../models/user';
-import { createToken, createRefreshToken } from '../../utils/jwt';
 
 interface RequestBody {
   emailToken?: string;
@@ -18,21 +18,14 @@ export const emailConfirmation = async (
       password: 0,
     });
 
-    if (!user) return res.status(500).json({ message: 'Token no valid' });
+    if (!user) return next(Boom.unauthorized('Token invalid'));
 
     await User.findByIdAndUpdate(user._id, {
       emailToken: null,
       verified: true,
     });
 
-    const tokenPayload = {
-      email: user.email,
-      userId: user._id,
-    };
-    const token = await createToken(tokenPayload);
-    const refreshToken = await createRefreshToken(tokenPayload);
-
-    res.status(200).json({ token, refreshToken, user });
+    res.status(200).json({ message: 'successful verification' });
   } catch (e) {
     next(e);
   }

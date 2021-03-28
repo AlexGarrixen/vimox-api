@@ -1,5 +1,6 @@
 import { Response, Request, NextFunction } from 'express';
 import { Schema } from 'joi';
+import Boom from '@hapi/boom';
 
 const validateScheme = (scheme: Schema, source: keyof Request = 'body') => (
   req: Request,
@@ -8,7 +9,7 @@ const validateScheme = (scheme: Schema, source: keyof Request = 'body') => (
 ) => {
   const { error } = scheme.validate(req[source]);
 
-  error ? res.status(400).json({ message: error.message }) : next();
+  error ? next(Boom.badRequest(error.message)) : next();
 };
 
 export default validateScheme;
