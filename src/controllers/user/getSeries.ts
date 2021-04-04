@@ -9,14 +9,11 @@ export const getSeries = async (
   const { userId } = req.params;
 
   try {
-    const library = await UserSeries.find({ userId }).populate({
-      path: 'serie',
-      populate: { path: 'episodes' },
-    });
+    const series = await UserSeries.find({ userId })
+      .populate('serie')
+      .populate('lastEpisodeWatched');
 
-    res.status(201).json({
-      library,
-    });
+    res.status(201).json(series);
   } catch (e) {
     next(e);
   }

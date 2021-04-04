@@ -1,4 +1,18 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model, Types, Document } from 'mongoose';
+
+interface SerieDoc extends Document {
+  name: string;
+  sinopsis: string;
+  imageSm: string;
+  imageMd: string;
+  imageLg: boolean;
+  createdAt: string;
+  episodes: string[];
+  geners: string[];
+  titles: string[];
+  type: string;
+  addedByUsers: { user: string }[];
+}
 
 const schema = new Schema(
   {
@@ -12,10 +26,11 @@ const schema = new Schema(
     geners: [{ type: Types.ObjectId, default: [], ref: 'Gener' }],
     titles: [String],
     type: String,
+    addedByUsers: [{ user: String }],
   },
   { versionKey: false }
 );
 
 schema.index({ titles: 'text' });
 
-export const Serie = model('Serie', schema);
+export const Serie = model<SerieDoc>('Serie', schema);
