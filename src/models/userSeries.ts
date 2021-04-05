@@ -3,14 +3,14 @@ import { Schema, model, Types, Document } from 'mongoose';
 interface UserSeriesDoc extends Document {
   userId: string;
   serie: Types.ObjectId;
-  lastEpisodeWatched: number;
+  lastEpisodeWatched: Types.ObjectId;
 }
 
 const schema = new Schema(
   {
-    userId: Types.ObjectId,
+    userId: String,
     serie: { type: Types.ObjectId, ref: 'Serie' },
-    lastEpisodeWatched: { type: Number, default: 0 },
+    lastEpisodeWatched: { type: Types.ObjectId, ref: 'Episode', default: null },
   },
   { versionKey: false }
 );

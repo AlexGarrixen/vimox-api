@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserSeries } from '../../models/userSeries';
+import { Serie } from '../../models/serie';
+import { Episode } from '../../models/episode';
 
 export const addSerie = async (
   req: Request,
@@ -10,8 +12,18 @@ export const addSerie = async (
   const { serieId } = req.body;
 
   try {
-    const SerieDoc = new UserSeries({ userId, serie: serieId });
-    const addedSerie = await SerieDoc.save();
+    const defaultEpisode = await Episode.findOne({ serie: serieId, order: 1 });
+    const userSerieDoc = new UserSeries({
+      userId,
+      serie: serieId,
+      lastEpisodeWatched: defaultEpisode?._id,
+    });
+    const addedSerie = await userSerieDoc.save();
+    await Serie.findByIdAndUpdate(serieId, {
+      $push: {
+        addedByUsers: { user: userId },
+      },
+    });
 
     res.status(200).json(addedSerie);
   } catch (e) {
