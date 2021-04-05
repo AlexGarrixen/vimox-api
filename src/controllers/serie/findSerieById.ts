@@ -38,6 +38,22 @@ export const findSerieById = async (
         },
       },
     },
+    {
+      $addFields: {
+        addedByUsers: {
+          $arrayToObject: {
+            $map: {
+              input: '$addedByUsers',
+              as: 'el',
+              in: {
+                k: '$$el.user',
+                v: '$$el',
+              },
+            },
+          },
+        },
+      },
+    },
   ];
 
   try {
