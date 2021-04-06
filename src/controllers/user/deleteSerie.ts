@@ -7,10 +7,13 @@ export const deleteSerie = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { serieId } = req.params;
+  const { serieId, userId } = req.params;
 
   try {
-    const deletedDoc = await UserSeries.findByIdAndDelete(serieId);
+    const deletedDoc = await UserSeries.findOneAndDelete({
+      serie: serieId,
+      userId,
+    });
 
     if (deletedDoc) {
       await Serie.findByIdAndUpdate(deletedDoc.serie, {
