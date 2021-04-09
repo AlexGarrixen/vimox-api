@@ -2,6 +2,7 @@ import { Route } from '../types';
 import { signUp } from '../controllers/auth/signup';
 import { login } from '../controllers/auth/login';
 import { emailConfirmation } from '../controllers/auth/emailConfirmation';
+import { renewToken } from '../controllers/auth/renewToken';
 import {
   schemeSignup,
   schemeEmailConfirmation,
@@ -26,5 +27,10 @@ export const auth: Route[] = [
       validateScheme(schemeEmailConfirmation, 'body'),
       emailConfirmation,
     ],
+  },
+  {
+    path: '/auth/renew-token',
+    method: 'post',
+    handlers: [renewToken],
   },
 ];

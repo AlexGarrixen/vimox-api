@@ -11,17 +11,19 @@ import {
   schemeUpdateSerieParams,
 } from '../utils/validationSchemes/user';
 import validateScheme from '../middlewares/validateScheme';
+import withAuth from '../middlewares/withAuth';
 
 export const user: Route[] = [
   {
     path: '/user/:userId/series',
     method: 'get',
-    handlers: [validateScheme(schemeUserId, 'params'), getSeries],
+    handlers: [withAuth, validateScheme(schemeUserId, 'params'), getSeries],
   },
   {
     path: '/user/:userId/series',
     method: 'post',
     handlers: [
+      withAuth,
       validateScheme(schemeUserId, 'params'),
       validateScheme(schemeAddSerie, 'body'),
       addSerie,
@@ -31,6 +33,7 @@ export const user: Route[] = [
     path: '/user/:userId/series/:serieId',
     method: 'put',
     handlers: [
+      withAuth,
       validateScheme(schemeUpdateSerieParams, 'params'),
       validateScheme(schemeUpdateSerie, 'body'),
       updateSerie,
@@ -39,6 +42,10 @@ export const user: Route[] = [
   {
     path: '/user/:userId/series/:serieId',
     method: 'delete',
-    handlers: [validateScheme(schemeDeleteSerie, 'params'), deleteSerie],
+    handlers: [
+      withAuth,
+      validateScheme(schemeDeleteSerie, 'params'),
+      deleteSerie,
+    ],
   },
 ];

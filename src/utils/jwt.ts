@@ -6,11 +6,11 @@ type JwtPayload = {
   email: string;
 };
 
-export const verifyToken = (token: string) =>
+export const verifyRefreshToken = (token: string): Promise<JwtPayload> =>
   new Promise((res, rej) => {
-    jwt.verify(token, SECRET_JWT as string, (error, token) => {
+    jwt.verify(token, SECRET_REFRESH_JWT as string, (error, token) => {
       if (error) rej(error);
-      else res(token);
+      else res(token as JwtPayload);
     });
   });
 
