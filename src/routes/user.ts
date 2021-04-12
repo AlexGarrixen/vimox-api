@@ -2,12 +2,12 @@ import { Route } from '../types';
 import { addSerie } from '../controllers/user/addSerie';
 import { deleteSerie } from '../controllers/user/deleteSerie';
 import { getSeries } from '../controllers/user/getSeries';
-import { updateSerie } from '../controllers/user/updateSerie';
+import { updateLastEpisodeWatched } from '../controllers/user/updateLastEpisodeWatched';
 import {
   schemeUserId,
   schemeAddSerie,
   schemeDeleteSerie,
-  schemeUpdateSerie,
+  schemeUpdateLastEpisodeWatchedOfSerie,
   schemeUpdateSerieParams,
 } from '../utils/validationSchemes/user';
 import validateScheme from '../middlewares/validateScheme';
@@ -30,13 +30,13 @@ export const user: Route[] = [
     ],
   },
   {
-    path: '/user/:userId/series/:serieId',
+    path: '/user/:userId/series/:serieId/last-episode-watched',
     method: 'put',
     handlers: [
       withAuth,
       validateScheme(schemeUpdateSerieParams, 'params'),
-      validateScheme(schemeUpdateSerie, 'body'),
-      updateSerie,
+      validateScheme(schemeUpdateLastEpisodeWatchedOfSerie, 'body'),
+      updateLastEpisodeWatched,
     ],
   },
   {
