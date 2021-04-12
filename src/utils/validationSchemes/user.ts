@@ -14,8 +14,8 @@ export const schemeDeleteSerie = Joi.object({
   userId: idScheme.required(),
 });
 
-export const schemeUpdateSerie = Joi.object({
-  lastEpisodeWatched: Joi.number(),
+export const schemeUpdateLastEpisodeWatchedOfSerie = Joi.object({
+  lastEpisodeWatched: Joi.string().required(),
 });
 
 export const schemeUpdateSerieParams = Joi.object({
