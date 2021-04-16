@@ -7,6 +7,7 @@ interface UserDoc extends Document {
   createdAt: string;
   verified: boolean;
   emailToken: string | null;
+  resetPasswordToken: string | null;
 }
 
 const schema = new Schema(
@@ -17,6 +18,7 @@ const schema = new Schema(
     createdAt: { type: Date, default: new Date().toISOString() },
     verified: { type: Boolean, default: false },
     emailToken: { type: String, default: null },
+    resetPasswordToken: { type: String, default: null },
   },
   { versionKey: false }
 );

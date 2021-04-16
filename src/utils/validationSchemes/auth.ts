@@ -9,3 +9,7 @@ export const schemeSignup = Joi.object({
 export const schemeEmailConfirmation = Joi.object({
   emailToken: Joi.string().required(),
 });
+
+export const schemeForgotPassword = Joi.object({
+  email: Joi.string().required(),
+});
