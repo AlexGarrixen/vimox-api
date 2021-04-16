@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { SECRET_JWT, SECRET_REFRESH_JWT } from './env';
+import { SECRET_JWT, SECRET_REFRESH_JWT, SECRET_RESET_PASSWORD } from './env';
 
 type JwtPayload = {
   userId: string;
@@ -33,6 +33,21 @@ export const createRefreshToken = (payload: JwtPayload) =>
       payload,
       SECRET_REFRESH_JWT as string,
       { expiresIn: '1h', subject: payload.email },
+      (error, token) => {
+        if (error) rej(error);
+        else res(token);
+      }
+    );
+  });
+
+export const createResetPasswordToken = (
+  payload: JwtPayload
+): Promise<string | undefined> =>
+  new Promise((res, rej) => {
+    jwt.sign(
+      payload,
+      SECRET_RESET_PASSWORD as string,
+      { expiresIn: '10m', subject: payload.email },
       (error, token) => {
         if (error) rej(error);
         else res(token);
