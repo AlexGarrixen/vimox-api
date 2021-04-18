@@ -14,3 +14,8 @@ export interface Episode {
   order: number;
   createdAt: string;
 }
+
+export interface JwtPayload {
+  userId: string;
+  email: string;
+}
