@@ -4,10 +4,12 @@ import { login } from '../controllers/auth/login';
 import { emailConfirmation } from '../controllers/auth/emailConfirmation';
 import { renewToken } from '../controllers/auth/renewToken';
 import { forgotPassword } from '../controllers/auth/forgotPassword';
+import { resetPassword } from '../controllers/auth/reset-password';
 import {
   schemeSignup,
   schemeEmailConfirmation,
   schemeForgotPassword,
+  schemeResetPassword,
 } from '../utils/validationSchemes/auth';
 import { validateScheme } from '../middlewares';
 
@@ -39,5 +41,10 @@ export const auth: Route[] = [
     path: '/auth/forgot-password',
     method: 'post',
     handlers: [validateScheme(schemeForgotPassword), forgotPassword],
+  },
+  {
+    path: '/auth/reset-password',
+    method: 'put',
+    handlers: [validateScheme(schemeResetPassword), resetPassword],
   },
 ];

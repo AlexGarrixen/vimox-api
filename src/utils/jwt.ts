@@ -1,14 +1,18 @@
 import jwt from 'jsonwebtoken';
 import { SECRET_JWT, SECRET_REFRESH_JWT, SECRET_RESET_PASSWORD } from './env';
-
-type JwtPayload = {
-  userId: string;
-  email: string;
-};
+import { JwtPayload } from '../types';
 
 export const verifyRefreshToken = (token: string): Promise<JwtPayload> =>
   new Promise((res, rej) => {
     jwt.verify(token, SECRET_REFRESH_JWT as string, (error, token) => {
+      if (error) rej(error);
+      else res(token as JwtPayload);
+    });
+  });
+
+export const verifyResetPasswordToken = (token: string): Promise<JwtPayload> =>
+  new Promise((res, rej) => {
+    jwt.verify(token, SECRET_RESET_PASSWORD as string, (error, token) => {
       if (error) rej(error);
       else res(token as JwtPayload);
     });

@@ -13,3 +13,8 @@ export const schemeEmailConfirmation = Joi.object({
 export const schemeForgotPassword = Joi.object({
   email: Joi.string().required(),
 });
+
+export const schemeResetPassword = Joi.object({
+  resetToken: Joi.string().required(),
+  newPassword: Joi.string().required(),
+});
