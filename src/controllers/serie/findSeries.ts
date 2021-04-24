@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { Types } from 'mongoose';
 import { Serie } from '../../models/serie';
+import { getNextPage, getPrevPage } from '../../utils/pagination';
 
 const defaultPageIdx = '1';
 const defaultLimit = '20';
@@ -124,8 +125,10 @@ export const findSeries = async (
     const count = await Serie.find(filterCount).countDocuments();
     const series = await Serie.aggregate(pipeline).skip(skip).limit(limit);
     const lastPage = Math.ceil(count / limit);
+    const nextPage = getNextPage(pageIndex, lastPage);
+    const prevPage = getPrevPage(pageIndex, 1);
 
-    res.status(200).json({ series, count, lastPage });
+    res.status(200).json({ series, count, lastPage, nextPage, prevPage });
   } catch (e) {
     next(e);
   }
