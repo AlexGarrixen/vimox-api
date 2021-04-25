@@ -2,9 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
 import { Episode } from '../../models/episode';
 import { Serie } from '../../models/serie';
-import { Episode as IEpisode } from '../../types';
-
-type Ep = IEpisode & Document;
 
 interface IndexEpisode {
   _id: string;
@@ -40,7 +37,7 @@ export const deleteEpisode = async (
   try {
     const { episodeId } = req.params;
 
-    const episode = (await Episode.findById(episodeId)) as Ep;
+    const episode = await Episode.findById(episodeId);
 
     if (episode === null)
       return res.status(404).json({ message: 'Not found episode' });

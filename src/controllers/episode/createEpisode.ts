@@ -1,10 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { Document } from 'mongoose';
 import { Episode } from '../../models/episode';
 import { Serie } from '../../models/serie';
-import { Episode as IEpisode } from '../../types';
-
-type Ep = IEpisode & Document;
 
 export const createEpisode = async (
   req: Request,
@@ -12,7 +8,7 @@ export const createEpisode = async (
   next: NextFunction
 ) => {
   try {
-    const episodeDoc = new Episode(req.body) as Ep;
+    const episodeDoc = new Episode(req.body);
 
     await episodeDoc.save();
     episodeDoc.getChanges();

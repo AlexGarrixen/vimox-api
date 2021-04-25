@@ -6,7 +6,6 @@ interface EpisodeDoc extends Document {
   sinopsis: string;
   src: string;
   thumbnail: string;
-  previewImage: string;
   order: number;
   duration: number;
   serie: string;
@@ -18,7 +17,6 @@ const schema = new Schema(
     sinopsis: String,
     src: String,
     thumbnail: String,
-    previewImage: String,
     order: Number,
     duration: Number,
     createdAt: { type: Date, default: new Date().toISOString() },
