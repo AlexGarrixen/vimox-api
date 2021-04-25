@@ -1,4 +1,16 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model, Types, Document } from 'mongoose';
+
+interface EpisodeDoc extends Document {
+  createdAt: string;
+  name: string;
+  sinopsis: string;
+  src: string;
+  thumbnail: string;
+  previewImage: string;
+  order: number;
+  duration: number;
+  serie: string;
+}
 
 const schema = new Schema(
   {
@@ -15,4 +27,4 @@ const schema = new Schema(
   { versionKey: false }
 );
 
-export const Episode = model('Episode', schema);
+export const Episode = model<EpisodeDoc>('Episode', schema);
