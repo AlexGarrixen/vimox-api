@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserSeries } from '../../models/userSeries';
-import { Serie } from '../../models/serie';
 import { Episode } from '../../models/episode';
 
 export const addSerie = async (
@@ -19,11 +18,6 @@ export const addSerie = async (
       lastEpisodeWatched: defaultEpisode?._id,
     });
     const addedSerie = await userSerieDoc.save();
-    await Serie.findByIdAndUpdate(serieId, {
-      $push: {
-        addedByUsers: { user: userId },
-      },
-    });
 
     res.status(200).json(addedSerie);
   } catch (e) {

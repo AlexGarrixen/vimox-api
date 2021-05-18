@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { Serie } from '../../models/serie';
 import { Types } from 'mongoose';
+import { Serie } from '../../models/serie';
+import { UserSeries } from '../../models/userSeries';
+import { retrieveBearerToken } from '../../utils/jwt';
 
 export const findSerieById = async (
   req: Request,
@@ -8,58 +10,48 @@ export const findSerieById = async (
   next: NextFunction
 ) => {
   const { serieId } = req.params;
+  const jwt = retrieveBearerToken(req);
 
-  const pipeline: Record<string, any>[] = [
-    {
-      $match: {
-        _id: Types.ObjectId(serieId),
-      },
-    },
-    {
-      $lookup: {
-        from: 'episodes',
-        localField: 'episodes',
-        foreignField: '_id',
-        as: 'episodes',
-      },
-    },
-    {
-      $lookup: {
-        from: 'geners',
-        localField: 'geners',
-        foreignField: '_id',
-        as: 'geners',
-      },
-    },
-    {
-      $addFields: {
-        totalDuration: {
-          $sum: '$episodes.duration',
+  try {
+    const [serie] = await Serie.aggregate([
+      {
+        $match: {
+          _id: Types.ObjectId(serieId),
         },
       },
-    },
-    {
-      $addFields: {
-        addedByUsers: {
-          $arrayToObject: {
-            $map: {
-              input: '$addedByUsers',
-              as: 'el',
-              in: {
-                k: '$$el.user',
-                v: '$$el',
-              },
-            },
+      {
+        $lookup: {
+          from: 'episodes',
+          localField: 'episodes',
+          foreignField: '_id',
+          as: 'episodes',
+        },
+      },
+      {
+        $addFields: {
+          duration: {
+            $sum: '$episodes.duration',
           },
         },
       },
-    },
-  ];
+      {
+        $lookup: {
+          from: 'geners',
+          localField: 'geners',
+          foreignField: '_id',
+          as: 'geners',
+        },
+      },
+    ]);
 
-  try {
-    const serie = await Serie.aggregate(pipeline);
+    const isInQueue =
+      jwt && serie
+        ? await UserSeries.findOne({ serie: serie._id, userId: jwt.userId })
+        : false;
 
-    res.status(200).json(serie !== null ? serie : {});
+    res
+      .status(200)
+      .json(serie ? { ...serie, isInQueue: Boolean(isInQueue) } : null);
   } catch (e) {
     next(e);
   }
