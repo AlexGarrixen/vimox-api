@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { Types } from 'mongoose';
 import { Serie } from '../../models/serie';
+import { UserSeries } from '../../models/userSeries';
 import { getNextPage, getPrevPage } from '../../utils/pagination';
+import { retrieveBearerToken } from '../../utils/jwt';
 
 const defaultPageIdx = '1';
 const defaultLimit = '20';
@@ -29,104 +30,44 @@ export const findSeries = async (
     gener,
   }: Querys = req.query;
 
+  const jwt = retrieveBearerToken(req);
   const pageIndex = parseInt(page_index || defaultPageIdx);
   const limit = parseInt(limit_items || defaultLimit);
   const skip = limit * (pageIndex - 1);
 
-  const pipeline: Record<string, any>[] = [
-    {
-      $lookup: {
-        from: 'episodes',
-        localField: 'episodes',
-        foreignField: '_id',
-        as: 'episodes',
-      },
-    },
-    {
-      $lookup: {
-        from: 'geners',
-        localField: 'geners',
-        foreignField: '_id',
-        as: 'geners',
-      },
-    },
-    {
-      $addFields: {
-        totalDuration: {
-          $sum: '$episodes.duration',
-        },
-      },
-    },
-    {
-      $addFields: {
-        addedByUsers: {
-          $arrayToObject: {
-            $map: {
-              input: '$addedByUsers',
-              as: 'el',
-              in: {
-                k: '$$el.user',
-                v: '$$el',
-              },
-            },
-          },
-        },
-      },
-    },
-  ];
+  const filterQuerys: Record<string, string> = {};
+  const sortQuerys: Record<string, string> = {};
 
-  let filterCount = {};
-
-  if (title)
-    pipeline.unshift({
-      $match: {
-        titles: {
-          $in: [new RegExp(title, 'gi')],
-        },
-      },
-    });
-
-  if (gener) {
-    pipeline.unshift({
-      $match: {
-        geners: {
-          $in: [Types.ObjectId(gener)],
-        },
-      },
-    });
-
-    filterCount = {
-      ...filterCount,
-      geners: {
-        $in: [Types.ObjectId(gener)],
-      },
-    };
-  }
-
-  if (sort_createdAt)
-    pipeline.push({
-      $sort: { createdAt: sort_createdAt === 'desc' ? -1 : 1 },
-    });
-
-  if (type) {
-    pipeline.push({
-      $match: {
-        type,
-      },
-    });
-
-    filterCount = {
-      ...filterCount,
-      type,
-    };
-  }
+  if (title) filterQuerys.title = title;
+  if (type) filterQuerys.type = type;
+  if (gener) filterQuerys.gener = gener;
+  if (sort_createdAt) sortQuerys.createdAt = sort_createdAt;
 
   try {
-    const count = await Serie.find(filterCount).countDocuments();
-    const series = await Serie.aggregate(pipeline).skip(skip).limit(limit);
+    const count = await Serie.find(filterQuerys).countDocuments();
+    const data = await Serie.find(filterQuerys)
+      .populate('geners')
+      .sort(sortQuerys)
+      .skip(skip)
+      .limit(limit)
+      .lean();
     const lastPage = Math.ceil(count / limit);
     const nextPage = getNextPage(pageIndex, lastPage);
     const prevPage = getPrevPage(pageIndex, 1);
+    const series = jwt
+      ? await Promise.all(
+          data.map(async (doc) => {
+            const serie = await UserSeries.findOne({
+              serie: doc._id,
+              userId: jwt.userId,
+            });
+            return {
+              ...doc,
+              isInQueue: Boolean(serie),
+            };
+          })
+        )
+      : data.map((doc) => ({ ...doc, isInQueue: false }));
 
     res.status(200).json({ series, count, lastPage, nextPage, prevPage });
   } catch (e) {

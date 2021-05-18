@@ -11,7 +11,6 @@ interface SerieDoc extends Document {
   geners: string[];
   titles: string[];
   type: string;
-  addedByUsers: { user: string }[];
 }
 
 const schema = new Schema(
@@ -26,7 +25,6 @@ const schema = new Schema(
     geners: [{ type: Types.ObjectId, default: [], ref: 'Gener' }],
     titles: [String],
     type: String,
-    addedByUsers: [{ user: String }],
   },
   { versionKey: false }
 );

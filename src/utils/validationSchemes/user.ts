@@ -9,6 +9,11 @@ export const schemeAddSerie = Joi.object({
   serieId: idScheme.required(),
 });
 
+export const schemeGetOneSerie = Joi.object({
+  userId: idScheme.required(),
+  serieId: idScheme.required(),
+});
+
 export const schemeDeleteSerie = Joi.object({
   serieId: idScheme.required(),
   userId: idScheme.required(),
