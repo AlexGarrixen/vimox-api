@@ -10,7 +10,6 @@ const defaultLimit = '20';
 interface Querys {
   page_index?: string;
   limit_items?: string;
-  title?: string;
   sort_createdAt?: 'asc' | 'desc';
   type?: string;
   gener?: string;
@@ -21,14 +20,8 @@ export const findSeries = async (
   res: Response,
   next: NextFunction
 ) => {
-  const {
-    page_index,
-    limit_items,
-    title,
-    sort_createdAt,
-    type,
-    gener,
-  }: Querys = req.query;
+  const { page_index, limit_items, sort_createdAt, type, gener }: Querys =
+    req.query;
 
   const jwt = retrieveBearerToken(req);
   const pageIndex = parseInt(page_index || defaultPageIdx);
@@ -38,7 +31,6 @@ export const findSeries = async (
   const filterQuerys: Record<string, string> = {};
   const sortQuerys: Record<string, string> = {};
 
-  if (title) filterQuerys.title = title;
   if (type) filterQuerys.type = type;
   if (gener) filterQuerys.gener = gener;
   if (sort_createdAt) sortQuerys.createdAt = sort_createdAt;
