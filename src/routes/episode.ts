@@ -15,32 +15,32 @@ import {
 export const episode: Route[] = [
   {
     method: 'get',
-    path: '/episodes',
+    path: '/',
     handlers: [findEpisodes],
   },
   {
     method: 'get',
-    path: '/episodes/:episodeId',
+    path: '/:episodeId',
     handlers: [validateScheme(schemeEpisodeId, 'params'), findById],
   },
   {
     method: 'get',
-    path: '/episodes/:episodeId/next-episodes',
+    path: '/:episodeId/next-episodes',
     handlers: [validateScheme(schemeEpisodeId, 'params'), nextEpisodes],
   },
   {
     method: 'post',
-    path: '/episodes',
+    path: '/',
     handlers: [validateScheme(schemeCreateEpisode, 'body'), createEpisode],
   },
   {
     method: 'delete',
-    path: '/episodes/:episodeId',
+    path: '/:episodeId',
     handlers: [validateScheme(schemeEpisodeId, 'params'), deleteEpisode],
   },
   {
     method: 'put',
-    path: '/episodes/:episodeId',
+    path: '/:episodeId',
     handlers: [
       validateScheme(schemeEpisodeId, 'params'),
       validateScheme(schemeUpdateEpisode, 'body'),

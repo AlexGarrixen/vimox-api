@@ -17,12 +17,12 @@ import withAuth from '../middlewares/withAuth';
 
 export const user: Route[] = [
   {
-    path: '/user/:userId/series',
+    path: '/:userId/series',
     method: 'get',
     handlers: [withAuth, validateScheme(schemeUserId, 'params'), getSeries],
   },
   {
-    path: '/user/:userId/series/:serieId',
+    path: '/:userId/series/:serieId',
     method: 'get',
     handlers: [
       withAuth,
@@ -31,7 +31,7 @@ export const user: Route[] = [
     ],
   },
   {
-    path: '/user/:userId/series',
+    path: '/:userId/series',
     method: 'post',
     handlers: [
       withAuth,
@@ -41,7 +41,7 @@ export const user: Route[] = [
     ],
   },
   {
-    path: '/user/:userId/series/:serieId/last-episode-watched',
+    path: '/:userId/series/:serieId/last-episode-watched',
     method: 'put',
     handlers: [
       withAuth,
@@ -51,7 +51,7 @@ export const user: Route[] = [
     ],
   },
   {
-    path: '/user/:userId/series/:serieId',
+    path: '/:userId/series/:serieId',
     method: 'delete',
     handlers: [
       withAuth,

@@ -1,6 +1,6 @@
 import express from 'express';
 import { connectDb } from './db/connection';
-import { createRoute } from './routes/createRoute';
+import { createRoutes } from './routes/createRoutes';
 import { auth } from './routes/auth';
 import { episode } from './routes/episode';
 import { gener } from './routes/gener';
@@ -19,11 +19,11 @@ app.use(corsOrigin());
 app.use(express.json());
 
 // routes
-createRoute(app, serie);
-createRoute(app, episode);
-createRoute(app, gener);
-createRoute(app, auth);
-createRoute(app, user);
+createRoutes('/series', serie, app);
+createRoutes('/episodes', episode, app);
+createRoutes('/geners', gener, app);
+createRoutes('/auth', auth, app);
+createRoutes('/user', user, app);
 
 //error handlers
 app.use(errorHandlers.errorBoomImplementation);
