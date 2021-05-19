@@ -15,17 +15,17 @@ import { validateScheme } from '../middlewares';
 
 export const auth: Route[] = [
   {
-    path: '/auth/signup',
+    path: '/signup',
     method: 'post',
     handlers: [validateScheme(schemeSignup), signUp],
   },
   {
-    path: '/auth/login',
+    path: '/login',
     method: 'post',
     handlers: [login],
   },
   {
-    path: '/auth/email-confirmation',
+    path: '/email-confirmation',
     method: 'post',
     handlers: [
       validateScheme(schemeEmailConfirmation, 'body'),
@@ -33,17 +33,17 @@ export const auth: Route[] = [
     ],
   },
   {
-    path: '/auth/renew-token',
+    path: '/renew-token',
     method: 'post',
     handlers: [renewToken],
   },
   {
-    path: '/auth/forgot-password',
+    path: '/forgot-password',
     method: 'post',
     handlers: [validateScheme(schemeForgotPassword), forgotPassword],
   },
   {
-    path: '/auth/reset-password',
+    path: '/reset-password',
     method: 'put',
     handlers: [validateScheme(schemeResetPassword), resetPassword],
   },

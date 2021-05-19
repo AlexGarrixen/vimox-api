@@ -14,27 +14,27 @@ import {
 export const serie: Route[] = [
   {
     method: 'get',
-    path: '/series',
+    path: '/',
     handlers: [findSeries],
   },
   {
     method: 'get',
-    path: '/series/:serieId',
+    path: '/:serieId',
     handlers: [validateScheme(schemeSerieId, 'params'), findSerieById],
   },
   {
     method: 'post',
-    path: '/series',
+    path: '/',
     handlers: [validateScheme(schemeCreateSerie, 'body'), createSerie],
   },
   {
     method: 'put',
-    path: '/series/:serieId',
+    path: '/:serieId',
     handlers: [validateScheme(schemeUpdateSerie, 'body'), updateSerie],
   },
   {
     method: 'delete',
-    path: '/series/:serieId',
+    path: '/:serieId',
     handlers: [validateScheme(schemeSerieId, 'params'), deleteSerie],
   },
 ];

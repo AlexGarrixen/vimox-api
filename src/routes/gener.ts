@@ -12,22 +12,22 @@ import { deleteGener } from '../controllers/gener/deleteGener';
 export const gener: Route[] = [
   {
     method: 'get',
-    path: '/geners',
+    path: '/',
     handlers: [findGeners],
   },
   {
     method: 'get',
-    path: '/geners/:generId',
+    path: '/:generId',
     handlers: [validateScheme(schemeGenerId, 'params'), findGenerById],
   },
   {
     method: 'post',
-    path: '/geners',
+    path: '/',
     handlers: [validateScheme(schemeCreateGener, 'body'), createGener],
   },
   {
     method: 'delete',
-    path: '/geners/:generId',
+    path: '/:generId',
     handlers: [validateScheme(schemeGenerId, 'params'), deleteGener],
   },
 ];
