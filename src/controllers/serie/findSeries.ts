@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { Types } from 'mongoose';
 import { Serie } from '../../models/serie';
 import { UserSeries } from '../../models/userSeries';
 import { getNextPage, getPrevPage } from '../../utils/pagination';
@@ -28,11 +29,11 @@ export const findSeries = async (
   const limit = parseInt(limit_items || defaultLimit);
   const skip = limit * (pageIndex - 1);
 
-  const filterQuerys: Record<string, string> = {};
+  const filterQuerys: Record<string, unknown> = {};
   const sortQuerys: Record<string, string> = {};
 
   if (type) filterQuerys.type = type;
-  if (gener) filterQuerys.gener = gener;
+  if (gener) filterQuerys.geners = { $in: [Types.ObjectId(gener)] };
   if (sort_createdAt) sortQuerys.createdAt = sort_createdAt;
 
   try {
