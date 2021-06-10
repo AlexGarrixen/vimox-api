@@ -34,14 +34,6 @@ export const findSerieById = async (
           },
         },
       },
-      {
-        $lookup: {
-          from: 'geners',
-          localField: 'geners',
-          foreignField: '_id',
-          as: 'geners',
-        },
-      },
     ]);
 
     const isInQueue =
