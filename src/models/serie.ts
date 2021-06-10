@@ -1,13 +1,11 @@
-import { Schema, model, Types, Document } from 'mongoose';
-
-interface SerieDoc extends Document {
+import { Schema, model, Types, Document, Model } from 'mongoose';
+export interface SerieDoc extends Document {
   name: string;
   sinopsis: string;
-  imageSm: string;
-  imageMd: string;
-  imageLg: boolean;
-  createdAt: string;
-  episodes: string[];
+  thumbnail: string;
+  bannerImage: string;
+  createdAt: Date;
+  release: Date;
   geners: string[];
   titles: string[];
   type: string;
@@ -17,18 +15,28 @@ const schema = new Schema(
   {
     name: String,
     sinopsis: String,
-    imageSm: String,
-    imageMd: String,
-    imageLg: String,
+    thumbnail: String,
+    bannerImage: String,
     createdAt: { type: Date, default: new Date().toISOString() },
-    episodes: [{ type: Types.ObjectId, default: [], ref: 'Episode' }],
-    geners: [{ type: Types.ObjectId, default: [], ref: 'Gener' }],
+    release: Date,
+    geners: [String],
     titles: [String],
     type: String,
   },
-  { versionKey: false }
+  {
+    versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
 
 schema.index({ titles: 'text' });
+
+schema.virtual('episodes', {
+  ref: 'Episode',
+  localField: '_id',
+  foreignField: 'serie',
+  count: true,
+});
 
 export const Serie = model<SerieDoc>('Serie', schema);
