@@ -9,6 +9,7 @@ interface EpisodeDoc extends Document {
   order: number;
   duration: number;
   serie: string;
+  release: Date;
 }
 
 const schema = new Schema(
@@ -20,6 +21,7 @@ const schema = new Schema(
     order: Number,
     duration: Number,
     createdAt: { type: Date, default: new Date().toISOString() },
+    release: Date,
     serie: { type: Types.ObjectId, ref: 'Serie' },
   },
   { versionKey: false }

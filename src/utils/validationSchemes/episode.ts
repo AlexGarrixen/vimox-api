@@ -7,12 +7,13 @@ export const schemeEpisodeId = Joi.object({
 
 export const schemeCreateEpisode = Joi.object({
   name: Joi.string().required(),
-  sinopsis: Joi.string().required(),
-  src: Joi.string().required(),
-  thumbnail: Joi.string().required(),
+  sinopsis: Joi.string(),
+  src: Joi.string(),
+  thumbnail: Joi.string(),
   order: Joi.number().required(),
   duration: Joi.number().required(),
   serie: Joi.string().required(),
+  release: Joi.date().required(),
 });
 
 export const schemeUpdateEpisode = Joi.object({
@@ -23,4 +24,5 @@ export const schemeUpdateEpisode = Joi.object({
   order: Joi.number(),
   duration: Joi.number(),
   serie: Joi.string(),
+  release: Joi.date(),
 });
