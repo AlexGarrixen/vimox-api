@@ -7,6 +7,7 @@ import { gener } from './routes/gener';
 import { serie } from './routes/serie';
 import { user } from './routes/user';
 import { search } from './routes/search';
+import { types } from './routes/types';
 import { corsOrigin, errorHandlers, notFound } from './middlewares';
 import './utils/authStrategies';
 
@@ -26,6 +27,7 @@ createRoutes('/geners', gener, app);
 createRoutes('/auth', auth, app);
 createRoutes('/user', user, app);
 createRoutes('/search', search, app);
+createRoutes('/types', types, app);
 
 //error handlers
 app.use(errorHandlers.errorBoomImplementation);
