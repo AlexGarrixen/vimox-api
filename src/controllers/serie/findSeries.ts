@@ -11,18 +11,24 @@ interface Querys {
   release?: string;
   type?: string;
   gener?: string;
+  name?: string;
+  title?: string;
 }
 
 const makeFilter = ({
   type,
   gener,
   release = '',
-}: Pick<Querys, 'type' | 'gener' | 'release'>) => {
+  name,
+  title,
+}: Pick<Querys, 'type' | 'gener' | 'release' | 'name' | 'title'>) => {
   const filter: Record<string, unknown> = {};
   const releaseTypes = ['today', 'last_premieres'];
 
   if (type) filter.type = type;
   if (gener) filter.geners = { $in: [gener] };
+  if (title) filter.titles = { $in: [new RegExp(title, 'gi')] };
+  if (name) filter.name = { $regex: new RegExp(name, 'gi') };
   if (releaseTypes.includes(release)) {
     switch (release) {
       case 'last_premieres':
@@ -70,13 +76,15 @@ export const findSeries = async (
     type,
     gener,
     release,
+    name,
+    title,
   }: Querys = req.query;
 
   const jwt = retrieveBearerToken(req);
   const pageIndex = parseInt(page_index || defaultPageIdx);
   const limit = parseInt(limit_items || defaultLimit);
   const skip = limit * (pageIndex - 1);
-  const filter = makeFilter({ type, gener, release });
+  const filter = makeFilter({ type, gener, release, name, title });
   const sort = makeSort({ sort_createdAt, sort_release });
 
   try {

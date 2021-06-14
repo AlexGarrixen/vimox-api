@@ -22,8 +22,8 @@ export const findSerieById = async (
       {
         $lookup: {
           from: 'episodes',
-          localField: 'episodes',
-          foreignField: '_id',
+          localField: '_id',
+          foreignField: 'serie',
           as: 'episodes',
         },
       },
