@@ -18,11 +18,19 @@ export const types: Route[] = [
   {
     path: '/',
     method: 'post',
-    handlers: [withAuth, validateScheme(schemeCreateType, 'body'), createType],
+    handlers: [
+      withAuth('admin'),
+      validateScheme(schemeCreateType, 'body'),
+      createType,
+    ],
   },
   {
     path: '/:typeId',
     method: 'delete',
-    handlers: [withAuth, validateScheme(schemeTypeId, 'params'), deleteType],
+    handlers: [
+      withAuth('admin'),
+      validateScheme(schemeTypeId, 'params'),
+      deleteType,
+    ],
   },
 ];

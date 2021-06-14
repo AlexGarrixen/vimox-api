@@ -14,7 +14,11 @@ export const login = async (req: Request, res: Response, next: NextFunction) =>
       if (!user) return next(Boom.unauthorized());
 
       try {
-        const tokenPayload = { email: user.email, userId: user._id };
+        const tokenPayload = {
+          email: user.email,
+          userId: user._id,
+          role: user.role,
+        };
         const token = await createToken(tokenPayload);
         const refreshToken = await createRefreshToken(tokenPayload);
 

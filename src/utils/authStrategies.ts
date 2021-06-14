@@ -3,7 +3,9 @@ import { BasicStrategy } from 'passport-http';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import bcrypt from 'bcryptjs';
 import { User } from '../models/user';
+import { Admin } from '../models/admin';
 import { SECRET_JWT } from './env';
+import { JwtPayload } from '../types';
 
 passport.use(
   new BasicStrategy(async (username, password, done) => {
@@ -18,6 +20,7 @@ passport.use(
         username: user.username,
         email: user.email,
         _id: user._id,
+        role: user.role,
       };
 
       return done(null, userData);
@@ -33,9 +36,14 @@ passport.use(
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: SECRET_JWT,
     },
-    async (jwtPayload, done) => {
+    async (jwtPayload: JwtPayload, done) => {
+      const role = jwtPayload.role;
+
       try {
-        const user = await User.findOne({ email: jwtPayload.email });
+        const user =
+          role === 'user'
+            ? await User.findOne({ email: jwtPayload.email })
+            : await Admin.findOne({ email: jwtPayload.email });
 
         if (!user) return done(null, false);
 

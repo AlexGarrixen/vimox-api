@@ -19,13 +19,17 @@ export const user: Route[] = [
   {
     path: '/:userId/series',
     method: 'get',
-    handlers: [withAuth, validateScheme(schemeUserId, 'params'), getSeries],
+    handlers: [
+      withAuth('user'),
+      validateScheme(schemeUserId, 'params'),
+      getSeries,
+    ],
   },
   {
     path: '/:userId/series/:serieId',
     method: 'get',
     handlers: [
-      withAuth,
+      withAuth('user'),
       validateScheme(schemeGetOneSerie, 'params'),
       getOneSerie,
     ],
@@ -34,7 +38,7 @@ export const user: Route[] = [
     path: '/:userId/series',
     method: 'post',
     handlers: [
-      withAuth,
+      withAuth('user'),
       validateScheme(schemeUserId, 'params'),
       validateScheme(schemeAddSerie, 'body'),
       addSerie,
@@ -44,7 +48,7 @@ export const user: Route[] = [
     path: '/:userId/series/:serieId/last-episode-watched',
     method: 'put',
     handlers: [
-      withAuth,
+      withAuth('user'),
       validateScheme(schemeUpdateSerieParams, 'params'),
       validateScheme(schemeUpdateLastEpisodeWatchedOfSerie, 'body'),
       updateLastEpisodeWatched,
@@ -54,7 +58,7 @@ export const user: Route[] = [
     path: '/:userId/series/:serieId',
     method: 'delete',
     handlers: [
-      withAuth,
+      withAuth('user'),
       validateScheme(schemeDeleteSerie, 'params'),
       deleteSerie,
     ],
