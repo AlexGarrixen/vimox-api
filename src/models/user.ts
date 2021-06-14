@@ -4,10 +4,11 @@ interface UserDoc extends Document {
   email: string;
   password: string;
   username: string;
-  createdAt: string;
+  createdAt: Date;
   verified: boolean;
   emailToken: string | null;
   resetPasswordToken: string | null;
+  role: string;
 }
 
 const schema = new Schema(
@@ -19,6 +20,7 @@ const schema = new Schema(
     verified: { type: Boolean, default: false },
     emailToken: { type: String, default: null },
     resetPasswordToken: { type: String, default: null },
+    role: { type: String, default: 'user' },
   },
   { versionKey: false }
 );

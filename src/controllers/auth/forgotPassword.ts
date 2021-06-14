@@ -19,6 +19,7 @@ export const forgotPassword = async (
     const token = await createResetPasswordToken({
       userId: user._id,
       email: user.email,
+      role: user.role,
     });
     await User.findByIdAndUpdate(user._id, {
       resetPasswordToken: token,

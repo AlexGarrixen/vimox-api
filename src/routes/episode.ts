@@ -6,6 +6,7 @@ import { findById } from '../controllers/episode/findById';
 import { deleteEpisode } from '../controllers/episode/deleteEpisode';
 import { updateEpisode } from '../controllers/episode/updateSerie';
 import { nextEpisodes } from '../controllers/episode/nextEpisodes';
+import withAuth from '../middlewares/withAuth';
 import {
   schemeCreateEpisode,
   schemeEpisodeId,
@@ -31,17 +32,26 @@ export const episode: Route[] = [
   {
     method: 'post',
     path: '/',
-    handlers: [validateScheme(schemeCreateEpisode, 'body'), createEpisode],
+    handlers: [
+      withAuth('admin'),
+      validateScheme(schemeCreateEpisode, 'body'),
+      createEpisode,
+    ],
   },
   {
     method: 'delete',
     path: '/:episodeId',
-    handlers: [validateScheme(schemeEpisodeId, 'params'), deleteEpisode],
+    handlers: [
+      withAuth('admin'),
+      validateScheme(schemeEpisodeId, 'params'),
+      deleteEpisode,
+    ],
   },
   {
     method: 'put',
     path: '/:episodeId',
     handlers: [
+      withAuth('admin'),
       validateScheme(schemeEpisodeId, 'params'),
       validateScheme(schemeUpdateEpisode, 'body'),
       updateEpisode,

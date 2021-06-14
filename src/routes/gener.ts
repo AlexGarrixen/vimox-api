@@ -8,6 +8,7 @@ import { findGeners } from '../controllers/gener/findGeners';
 import { findGenerById } from '../controllers/gener/findGenerById';
 import { createGener } from '../controllers/gener/createGener';
 import { deleteGener } from '../controllers/gener/deleteGener';
+import withAuth from '../middlewares/withAuth';
 
 export const gener: Route[] = [
   {
@@ -23,11 +24,19 @@ export const gener: Route[] = [
   {
     method: 'post',
     path: '/',
-    handlers: [validateScheme(schemeCreateGener, 'body'), createGener],
+    handlers: [
+      withAuth('admin'),
+      validateScheme(schemeCreateGener, 'body'),
+      createGener,
+    ],
   },
   {
     method: 'delete',
     path: '/:generId',
-    handlers: [validateScheme(schemeGenerId, 'params'), deleteGener],
+    handlers: [
+      withAuth('admin'),
+      validateScheme(schemeGenerId, 'params'),
+      deleteGener,
+    ],
   },
 ];

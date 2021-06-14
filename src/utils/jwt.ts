@@ -4,22 +4,6 @@ import jwtDecode from 'jwt-decode';
 import { SECRET_JWT, SECRET_REFRESH_JWT, SECRET_RESET_PASSWORD } from './env';
 import { JwtPayload } from '../types';
 
-export const verifyRefreshToken = (token: string): Promise<JwtPayload> =>
-  new Promise((res, rej) => {
-    jwt.verify(token, SECRET_REFRESH_JWT as string, (error, token) => {
-      if (error) rej(error);
-      else res(token as JwtPayload);
-    });
-  });
-
-export const verifyResetPasswordToken = (token: string): Promise<JwtPayload> =>
-  new Promise((res, rej) => {
-    jwt.verify(token, SECRET_RESET_PASSWORD as string, (error, token) => {
-      if (error) rej(error);
-      else res(token as JwtPayload);
-    });
-  });
-
 export const createToken = (payload: JwtPayload) =>
   new Promise((res, rej) => {
     jwt.sign(
@@ -59,6 +43,22 @@ export const createResetPasswordToken = (
         else res(token);
       }
     );
+  });
+
+export const verifyRefreshToken = (token: string): Promise<JwtPayload> =>
+  new Promise((res, rej) => {
+    jwt.verify(token, SECRET_REFRESH_JWT as string, (error, token) => {
+      if (error) rej(error);
+      else res(token as JwtPayload);
+    });
+  });
+
+export const verifyResetPasswordToken = (token: string): Promise<JwtPayload> =>
+  new Promise((res, rej) => {
+    jwt.verify(token, SECRET_RESET_PASSWORD as string, (error, token) => {
+      if (error) rej(error);
+      else res(token as JwtPayload);
+    });
   });
 
 export const retrieveBearerToken = (req: Request) => {
