@@ -1,13 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserSeries } from '../../models/userSeries';
 
-export const getOneSerie = async (req: Request, res: Response, next: NextFunction) => {
+export const getOneSerie = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { serieId, userId } = req.params;
 
   try {
-    const serie = await UserSeries.findOne({ serie: serieId, userId })
+    const serie = await UserSeries.findOne({ serie: serieId, userId });
     res.status(200).json(serie);
-  } catch(reason) {
+  } catch (reason) {
     next(reason);
   }
 };

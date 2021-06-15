@@ -7,6 +7,7 @@ export const createUserAdmin = async (values: {
   username: string;
   password: string;
 }) => {
+  // eslint-disable-next-line no-useless-catch
   try {
     await connectDb();
     const hashPassword = await bcrypt.hash(values.password, 10);

@@ -10,7 +10,7 @@ export const resetPassword = async (
   next: NextFunction
 ) => {
   const { resetToken, newPassword } = req.body;
-  
+
   try {
     const token = await verifyResetPasswordToken(resetToken);
     const user = await User.findById(token.userId);

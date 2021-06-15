@@ -25,13 +25,14 @@ const makeFilter = ({
       case 'last_premieres':
         filter.release = { $lte: new Date().toISOString() };
         break;
-      case 'today':
+      case 'today': {
         const start = new Date();
         const end = new Date();
         start.setHours(0, 0, 0, 0);
         end.setHours(23, 59, 59, 999);
         filter.release = { $gte: start, $lt: end };
         break;
+      }
     }
   }
 
