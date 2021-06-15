@@ -22,7 +22,7 @@ export const adminLogin = async (
   try {
     const user = await Admin.findOne(
       { email: email },
-      '_id email role password'
+      '_id email role password username'
     ).lean();
 
     if (!user) return next(Boom.unauthorized());
