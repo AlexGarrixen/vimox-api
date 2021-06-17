@@ -11,13 +11,22 @@ export const addSerie = async (
   const { serieId } = req.body;
 
   try {
-    const defaultEpisode = await Episode.findOne({ serie: serieId, order: 1 });
+    const defaultEpisode = await Episode.findOne({
+      serie: serieId,
+      order: 1,
+    }).lean();
     const userSerieDoc = new UserSeries({
       userId,
       serie: serieId,
       lastEpisodeWatched: defaultEpisode?._id,
     });
-    const addedSerie = await userSerieDoc.save();
+    await userSerieDoc.save();
+    const addedSerie = await UserSeries.findOne({
+      userId,
+      serie: serieId,
+    })
+      .populate('serie')
+      .populate('lastEpisodeWatched');
 
     res.status(200).json(addedSerie);
   } catch (e) {

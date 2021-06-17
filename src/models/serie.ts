@@ -1,4 +1,4 @@
-import { Schema, model, Types, Document, Model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 export interface SerieDoc extends Document {
   name: string;
   sinopsis: string;

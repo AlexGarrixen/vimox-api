@@ -12,7 +12,7 @@ export const findSerie = async (
   if (title) filterQuerys.titles = { $in: [new RegExp(title as string, 'gi')] };
 
   try {
-    const results = await Serie.find(filterQuerys);
+    const results = await Serie.find(filterQuerys).populate('episodes');
     res.status(200).json(results);
   } catch (reason) {
     next(reason);
