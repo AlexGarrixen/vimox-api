@@ -7,12 +7,20 @@ export const findSerie = async (
   next: NextFunction
 ) => {
   const { title } = req.query;
-  const filterQuerys: Record<string, unknown> = {};
+  const filter: Record<string, unknown> = {};
 
-  if (title) filterQuerys.titles = { $in: [new RegExp(title as string, 'gi')] };
+  filter.release = {
+    $lte: new Date().toISOString(),
+  };
+
+  if (title) {
+    filter.titles = {
+      $in: [new RegExp(title as string, 'gi')],
+    };
+  }
 
   try {
-    const results = await Serie.find(filterQuerys).populate('episodes');
+    const results = await Serie.find(filter).populate('episodes');
     res.status(200).json(results);
   } catch (reason) {
     next(reason);
