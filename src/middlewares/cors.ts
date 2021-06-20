@@ -1,8 +1,11 @@
 import cors, { CorsOptions } from 'cors';
-import { ORIGIN_CLIENT } from '../utils/env';
+import { ORIGIN_CLIENTS } from '../utils/env';
 
 const isProd = process.env.NODE_ENV === 'production';
-const whitelist: string[] = [ORIGIN_CLIENT as string];
+const whitelist: string[] =
+  typeof ORIGIN_CLIENTS === 'string'
+    ? ORIGIN_CLIENTS.split(';').filter((str) => str.length > 0)
+    : [];
 
 const options: CorsOptions = {
   origin: (origin, cb) => {
