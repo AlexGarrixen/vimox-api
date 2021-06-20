@@ -13,13 +13,14 @@
     }
   ],
   "env": {
-    "DB_NAME": "@gxanime-api_db-prod-name",
+    "DB_NAME": "@vimox-api-db-name",
     "DB_USER": "@gxanime-api_db-user",
     "DB_PASSWORD": "@gxanime-api_db-password",
     "DB_HOST": "@gxanime-api_db-host",
-    "ORIGIN_CLIENT": "@vimox-api-origin-client",
+    "SENDGRID_CLIENT": "@vimox-api-sendgrid-client",
     "SENDGRID_API_KEY": "@gx-anime-api-sengrid_api_key",
     "SECRET_JWT": "@gx-anime-api-secret_jwt",
-    "SECRET_REFRESH_JWT": "@gx-anime-api-secret-refresh-jwt"
+    "SECRET_REFRESH_JWT": "@gx-anime-api-secret-refresh-jwt",
+    "ORIGIN_CLIENTS": "@vimox-api-clients"
   }
 }
