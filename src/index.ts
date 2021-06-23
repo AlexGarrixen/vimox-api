@@ -1,4 +1,5 @@
 import express from 'express';
+import helmet from 'helmet';
 import { connectDb } from './db/connection';
 import { createRoutes } from './routes/createRoutes';
 import { auth } from './routes/auth';
@@ -19,6 +20,7 @@ connectDb();
 // middlewares
 app.use(corsOrigin());
 app.use(express.json());
+app.use(helmet());
 
 // routes
 createRoutes('/series', serie, app);

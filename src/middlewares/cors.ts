@@ -4,7 +4,7 @@ import { ORIGIN_CLIENTS } from '../utils/env';
 const isProd = process.env.NODE_ENV === 'production';
 const whitelist: string[] =
   typeof ORIGIN_CLIENTS === 'string'
-    ? ORIGIN_CLIENTS.split(';').filter((str) => str.length > 0)
+    ? ORIGIN_CLIENTS.split('~').filter((str) => str.length > 0)
     : [];
 
 const options: CorsOptions = {
