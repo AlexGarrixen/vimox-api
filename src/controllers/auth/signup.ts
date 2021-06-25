@@ -34,9 +34,12 @@ export const signUp = async (
     const createdUser = await userDoc.save();
 
     await sgMail.send({
-      to: email,
-      from: 'gxanimejs@gmail.com',
-      subject: 'Bienvenido a GxAnime!',
+      to: [email, 'vimox.co@gmail.com'],
+      from: {
+        name: 'Vimox',
+        email: 'vimox.co@gmail.com',
+      },
+      subject: 'Bienvenido a Vimox!',
       text: 'Confirma tu Email',
       html: templateEmailVerification(createdUser.emailToken as string),
     });

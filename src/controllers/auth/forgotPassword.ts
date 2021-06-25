@@ -25,9 +25,12 @@ export const forgotPassword = async (
       resetPasswordToken: token,
     });
     await sgMail.send({
-      to: email,
-      from: 'gxanimejs@gmail.com',
-      subject: 'Restablecer mi contraseña de GxAnime!',
+      to: [email, 'vimox.co@gmail.com'],
+      from: {
+        name: 'Vimox',
+        email: 'vimox.co@gmail.com',
+      },
+      subject: 'Restablecer mi contraseña de Vimox!',
       text: 'Confirma tu nueva contraseña',
       html: templateResetPassword(token as string),
     });

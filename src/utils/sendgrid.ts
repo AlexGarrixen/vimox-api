@@ -10,7 +10,7 @@ export { sgMail };
 
 export const templateEmailVerification = (token: string) => `
   <div style='padding: 24px; background: #fdfdfd; box-sizing:border-box; font-family:'Open Sans','Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif'>
-    <img src='https://res.cloudinary.com/djiqx3siw/image/upload/v1616550380/logo_eycwgm.png' style='margin: 0; margin-bottom: 12px' />
+    <img src='https://res.cloudinary.com/djiqx3siw/image/upload/v1624648486/vimox-inc-logo_rmuu4n.png' style='margin: 0; margin-bottom: 12px; width: 120px;' />
     <div style='background: #fff; padding: 24px; border: 1px solid #f0f0f0; box-sizing:border-box'>
       <div style='margin-bottom: 32px'>
       <h2 style='margin: 0'>Hola!</h2>
@@ -32,12 +32,12 @@ export const templateEmailVerification = (token: string) => `
 
 export const templateResetPassword = (token: string) => `
   <div style='padding: 24px; background: #fdfdfd; box-sizing:border-box; font-family:'Open Sans','Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif'>
-    <img src='https://res.cloudinary.com/djiqx3siw/image/upload/v1616550380/logo_eycwgm.png' style='margin: 0; margin-bottom: 12px' />
+    <img src='https://res.cloudinary.com/djiqx3siw/image/upload/v1624648486/vimox-inc-logo_rmuu4n.png' style='margin: 0; margin-bottom: 12px; width: 120px;' />
     <div style='background: #fff; padding: 24px; border: 1px solid #f0f0f0; box-sizing:border-box'>
       <div style='margin-bottom: 32px'>
       <h2 style='margin: 0'>Hola!</h2>
       <p style='margin: 0; margin-top: 12px'>
-        Se ha recibido una solicitud para cambiar la contraseña de su cuenta de GxAnime
+        Se ha recibido una solicitud para cambiar la contraseña de su cuenta de Vimox
       </p>
       </div>
 

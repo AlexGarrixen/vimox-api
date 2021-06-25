@@ -3,16 +3,19 @@
 </p>
 
 # Branches
-- **develop**  ->  any pull request of changes this branch
+
+- **develop** -> any pull request of changes this branch
 - **main** -> don´t modify, this is what is running in production
 
 # How to run locally
+
 ```bash
 $ npm install
 $ npm run dev
 ```
 
-####  Set enviroment variables .env.development | .env.production
+#### Set enviroment variables .env.development | .env.production
+
 ```
 DB_NAME=
 DB_USER=
