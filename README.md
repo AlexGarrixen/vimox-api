@@ -32,3 +32,16 @@ SENDGRID_API_KEY=
 ORIGIN_CLIENTS=
 SENDGRID_CLIENT=
 ```
+
+| Name                  | Description                                            | Example                                                              |
+|-----------------------|--------------------------------------------------------|----------------------------------------------------------------------|
+| DB_NAME               | Database name mongo                                    |                                                                      |
+| DB_USER               | Database user mongo                                    |                                                                      |
+| DB_PASSWORD           | Database password mongo                                |                                                                      |
+| DB_HOST               | Database host mongo                                    |                                                                      |
+| SECRET_JWT            | Secret key to sign the token                           |                                                                      |
+| SECRET_REFRESH_JWT    | Secret key to sign refresh token                       |                                                                      |
+| SECRET_RESET_PASSWORD | Secret key to sign password reset token                |                                                                      |
+| SENDGRID_API_KEY      | Api key of Sendgrid                                    |                                                                      |
+| ORIGIN_CLIENTS        |  Whitelist of clients that will not be blocked by cors | http://localhost:3000 or http://localhost:3000~http://localhost:4000 |
+| SENDGRID_CLIENT       | Frontend client url                                    | http://localhost:3000                                                |
