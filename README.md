@@ -45,3 +45,10 @@ SENDGRID_CLIENT=
 | SENDGRID_API_KEY      | Api key of Sendgrid                                    |                                                                      |
 | ORIGIN_CLIENTS        |  Whitelist of clients that will not be blocked by cors | http://localhost:3000 or http://localhost:3000~http://localhost:4000 |
 | SENDGRID_CLIENT       | Frontend client url                                    | http://localhost:3000                                                |
+
+
+# How to create an administrator
+```
+$ npm run scripts
+```
+And select option ```Create user admin```
