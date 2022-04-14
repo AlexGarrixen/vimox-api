@@ -18,6 +18,12 @@ $ npm install
 $ npm run dev
 ```
 
+# How to create Admin user
+Use the interactive cli create admin user to create an admin.
+```bash
+$ npm run scripts
+```
+
 #### Set enviroment variables .env.development | .env.production
 
 ```
